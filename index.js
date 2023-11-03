@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const port = 3000;
 
@@ -22,7 +23,15 @@ let mock =[
 ]
 
 app.get('/pokemons', (req, res) => {
-  res.json(mock)
+  const { limit, offset } = req.query;
+
+  if (limit && offset) {
+    let data = mock.slice(offset, limit)
+    res.json(data)
+  }
+  else {
+    res.json(mock)
+  }
 })
 
 app.get('/pokemons/:id', (req, res) => {
