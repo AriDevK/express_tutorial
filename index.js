@@ -2,19 +2,35 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+
+let mock =[
+  {
+    id: 1,
+    name: 'Bulbasaur',
+    type: 'grass'
+  },
+  {
+    id: 2,
+    name: 'Charmander',
+    type: 'fire'
+  },
+  {
+    id: 3,
+    name: 'Squirtle',
+    type: 'water'
+  }
+]
+
+app.get('/pokemons', (req, res) => {
+  res.json(mock)
 })
 
-app.get('/about', (req, res) => {
-  res.send('About Page');
-})
+app.get('/pokemons/:id', (req, res) => {
+  let { id } = req.params;
+  let data = mock.filter(pokemon => pokemon.id == id)
+  let response = data.length > 0 ? data[0] : {}
 
-app.get('/api', (req, res) => {
-  res.json({
-    name: 'Ari',
-    age: 22
-  });
+  res.json(response)
 })
 
 
