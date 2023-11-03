@@ -1,12 +1,14 @@
-const express = require('express');
-const { faker } = require('@faker-js/faker');
-
 import { User } from "./models/user.model";
 import { Application, Request, Response } from 'express';
+const { faker } = require('@faker-js/faker');
 
+const express = require('express');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const app: Application = express();
-const port = 3000;
+const port = process.env.PORT;
 
 
 let mock: User[] = []
